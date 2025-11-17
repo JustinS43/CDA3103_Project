@@ -196,6 +196,17 @@ void read_register(unsigned r1,unsigned r2,unsigned *Reg,unsigned *data1,unsigne
 /* 10 Points */
 void sign_extend(unsigned offset,unsigned *extended_value)
 {
+    // this is bit 15
+    unsigned signBit = 0x8000;
+
+    if (offset & signBit) {
+        // Negative number fills the upper 16bits with 1s
+        *extended_value = offset | 0xFFFF0000;
+    } else {
+        // Positive number keeps the lower 16 bits
+        *extended_value = offset & 0x0000FFFF;
+    }
+
 
 }
 
