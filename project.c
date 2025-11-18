@@ -87,7 +87,6 @@ unsigned *offset, unsigned *jsec)
 }
 
 /* instruction decode */
-/* 15 Points */
 int instruction_decode(unsigned op, struct_controls *controls)
 {
     /* default / don't-care values */
@@ -202,7 +201,6 @@ int instruction_decode(unsigned op, struct_controls *controls)
 }
 
 /* Read Register */
-/* 5 Points */
 void read_register(unsigned r1,unsigned r2,unsigned *Reg,unsigned *data1,unsigned *data2)
 {
     /* Read register r1 and r2 and output their values */
@@ -211,7 +209,6 @@ void read_register(unsigned r1,unsigned r2,unsigned *Reg,unsigned *data1,unsigne
 }
 
 /* Sign Extend */
-/* 10 Points */
 void sign_extend(unsigned offset,unsigned *extended_value)
 {
     /* bit 15 is the sign bit of the 16-bit immediate */
@@ -229,8 +226,7 @@ void sign_extend(unsigned offset,unsigned *extended_value)
     }
 }
 
-/* ALU operations */
-/* 10 Points */
+/* ALU operations - Alexander Walker */
 int ALU_operations(unsigned data1,unsigned data2,unsigned extended_value,unsigned funct,char ALUOp,char ALUSrc,
 unsigned *ALUresult,char *Zero)
 {
@@ -281,8 +277,7 @@ unsigned *ALUresult,char *Zero)
     return 0;
 }
 
-/* Read / Write Memory */
-/* 10 Points */
+/* Read / Write Memory - Alexander Walker*/
 int rw_memory(unsigned ALUresult,unsigned data2,char MemWrite,char MemRead,unsigned *memdata,unsigned *Mem)
 {
     /* Memory read */
@@ -308,8 +303,7 @@ int rw_memory(unsigned ALUresult,unsigned data2,char MemWrite,char MemRead,unsig
     return 0;
 }
 
-/* Write Register */
-/* 10 Points */
+/* Write Register - Alexander Walker */
 void write_register(unsigned r2, unsigned r3,unsigned memdata, unsigned ALUresult,char RegWrite, char RegDst, char MemtoReg,
 unsigned *Reg)
 {
@@ -352,8 +346,7 @@ unsigned *Reg)
     Reg[dest] = value;
 }
 
-/* PC update */
-/* 10 Points */
+/* PC update - Alexander Walker */ 
 void PC_update(unsigned jsec,unsigned extended_value,char Branch,char Jump,char Zero,unsigned *PC)
 {
     /* Default: move to next sequential instruction */
