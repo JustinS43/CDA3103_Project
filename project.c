@@ -1,6 +1,6 @@
 #include "spimcore.h"
 
-/* ALU */
+/* ALU - Mustapha Strachan*/
 void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
 {
     switch (ALUControl)
@@ -38,7 +38,7 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
     *Zero = (*ALUresult == 0) ? 1 : 0;
 }
 
-/* instruction fetch */
+/* instruction fetch - Mustapha Strachan*/
 int instruction_fetch(unsigned PC,unsigned *Mem,unsigned *instruction)
 {
     /* halt if address is out of range or not word aligned */
@@ -54,7 +54,7 @@ int instruction_fetch(unsigned PC,unsigned *Mem,unsigned *instruction)
     return 0;
 }
 
-/* instruction partition */
+/* instruction partition - Mustapha Strachan */
 void instruction_partition(unsigned instruction,
                            unsigned *op,
                            unsigned *r1,
@@ -73,7 +73,7 @@ void instruction_partition(unsigned instruction,
     *jsec   =  instruction        & 0x3FFFFFF; /* bits 25-0  */
 }
 
-/* instruction decode */
+/* instruction decode - Justin Suriel  */
 int instruction_decode(unsigned op,struct_controls *controls)
 {
     /* default everything to 0 (safe "do nothing") */
@@ -176,14 +176,14 @@ int instruction_decode(unsigned op,struct_controls *controls)
     return 0;
 }
 
-/* Read Register */
+/* Read Register - Justin Suriel */
 void read_register(unsigned r1,unsigned r2,unsigned *Reg,unsigned *data1,unsigned *data2)
 {
     *data1 = Reg[r1];
     *data2 = Reg[r2];
 }
 
-/* Sign Extend */
+/* Sign Extend - Justin Suriel */
 void sign_extend(unsigned offset,unsigned *extended_value)
 {
     if (offset & 0x8000)  /* negative number */
@@ -192,7 +192,7 @@ void sign_extend(unsigned offset,unsigned *extended_value)
         *extended_value = offset & 0x0000FFFF;
 }
 
-/* ALU operations */
+/* ALU operations - Alexander Walker */
 int ALU_operations(unsigned data1,unsigned data2,unsigned extended_value,
                    unsigned funct,char ALUOp,char ALUSrc,
                    unsigned *ALUresult,char *Zero)
@@ -241,7 +241,7 @@ int ALU_operations(unsigned data1,unsigned data2,unsigned extended_value,
     return 0;
 }
 
-/* Read / Write Memory */
+/* Read / Write Memory - Alexander Walker */
 int rw_memory(unsigned ALUresult,unsigned data2,char MemWrite,char MemRead,
               unsigned *memdata,unsigned *Mem)
 {
@@ -265,7 +265,7 @@ int rw_memory(unsigned ALUresult,unsigned data2,char MemWrite,char MemRead,
     return 0;
 }
 
-/* Write Register */
+/* Write Register - Alexander Walker */
 void write_register(unsigned r2,unsigned r3,unsigned memdata,unsigned ALUresult,
                     char RegWrite,char RegDst,char MemtoReg,unsigned *Reg)
 {
@@ -278,7 +278,7 @@ void write_register(unsigned r2,unsigned r3,unsigned memdata,unsigned ALUresult,
     Reg[dest] = value;
 }
 
-/* PC update */
+/* PC update - Alexander Walker */
 void PC_update(unsigned jsec,unsigned extended_value,char Branch,char Jump,
                char Zero,unsigned *PC)
 {
